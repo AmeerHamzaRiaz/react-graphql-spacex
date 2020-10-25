@@ -1,13 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './App.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { BrowserRouter as Router } from 'react-router-dom';
+
+const client = new ApolloClient({
+  uri: 'https://spacexdata.herokuapp.com/graphql',
+  cache: new InMemoryCache()
+});
+
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <ThemeProvider>
+      <CSSReset />
+      <ApolloProvider client={client}>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </ApolloProvider>
+    </ThemeProvider>
+  </Router>,
   document.getElementById('root')
 );
 

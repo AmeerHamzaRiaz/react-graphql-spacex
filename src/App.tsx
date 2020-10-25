@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+import LaunchList from './components/LaunchList';
+import LaunchProfile from './components/LaunchProfile';
+import Error from './components/Misc/Error';
+import Home from "./screens/Home";
+import { Route, Switch } from 'react-router-dom';
+
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/launches" component={LaunchList} />
+        <Route exact path="/launches/:id" component={LaunchProfile} />
+        <Route path="*" component={Error} />
+
+      </Switch>
     </div>
   );
 }
